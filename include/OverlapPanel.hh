@@ -71,20 +71,20 @@ namespace easy {
 			return *p;
 		}
 
-		void Arange(Size size) {
+		void Measure(Size size) {
 			ActualSize = {
 				std::max(0, size.Width - Margin.Right - Margin.Left),
 				std::max(0, size.Height - Margin.Top - Margin.Bottom),
 			};
 			for (auto& child : children) {
-				if (child) child->Arange(ActualSize);
+				if (child) child->Measure(ActualSize);
 			}
 		}
 
-		void Layout(Pos base, Size size) {
-			_Element::Layout(base, size);
+		void Arange(Pos base, Size size) {
+			_Element::Arange(base, size);
 			for (auto& child : children)
-				if (child) child->Layout(ActualPos, ActualSize);
+				if (child) child->Arange(ActualPos, ActualSize);
 		}
 
 		void Render() {

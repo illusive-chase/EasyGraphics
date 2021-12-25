@@ -46,7 +46,7 @@ namespace easy {
 			return std::make_pair(nullptr, dist);
 		}
 
-		virtual void Arange(Size size) {
+		virtual void Measure(Size size) {
 			ActualSize = {
 				std::max(0, std::min(size.Width - Margin.Right - Margin.Left, SpecSize.Width)),
 				std::max(0, std::min(size.Height - Margin.Top - Margin.Bottom, SpecSize.Height))
@@ -55,7 +55,7 @@ namespace easy {
 			if (SpecSize.Height == 0) ActualSize.Height = std::max(0, size.Height - Margin.Top - Margin.Bottom);
 		}
 
-		virtual void Layout(Pos base, Size size) {
+		virtual void Arange(Pos base, Size size) {
 			if (HorizontalAlignment == HorizontalAlignType::Left)
 				ActualPos.X = base.X + Margin.Left;
 			else if (HorizontalAlignment == HorizontalAlignType::Right)
@@ -90,8 +90,8 @@ namespace easy {
 		auto OnRender = [root, size]() {
 			if (Renderer::Invalidated()) {
 				Pos origin = { 0, 0 };
-				root->Arange(size);
-				root->Layout(origin, size);
+				root->Measure(size);
+				root->Arange(origin, size);
 				root->Render();
 				Renderer::Render();
 				Renderer::Invalidated() = false;

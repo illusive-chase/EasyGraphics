@@ -1,5 +1,7 @@
-#ifndef LINUX_RENDER_HH_
-#define LINUX_RENDER_HH_
+#ifndef SYSTEM_IO_HH_
+#define SYSTEM_IO_HH_
+
+#include <cstdint>
 
 struct RenderImpl {
     static int Width();

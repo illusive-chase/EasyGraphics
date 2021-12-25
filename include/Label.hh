@@ -46,7 +46,7 @@ namespace easy {
 		VerticalAlignType FontVerticalAlignment = VerticalAlignType::Center;
 		HorizontalAlignType FontHorizontalAlignment = HorizontalAlignType::Center;
 
-		void Arange(Size size) {
+		void Measure(Size size) {
 			Size fsize = SpecSize;
 			if (fsize.Width == 0) fsize.Width = font_size[static_cast<int>(FontSize)] * static_cast<int>(Text.length()) / 2;
 			if (fsize.Height == 0) fsize.Height = font_size[static_cast<int>(FontSize)];
@@ -70,9 +70,10 @@ namespace easy {
 				margin.Y = (ActualSize.Height - fsize.Height) / 2;
 			else if (FontVerticalAlignment == VerticalAlignType::Bottom)
 				margin.Y = ActualSize.Height - fsize.Height;
+			Rect ActualRect = Rect::BaseOn(ActualPos, ActualSize);
 			for (char c : Text) {
 				int offset = static_cast<int>(c) * ((fsize.Width + 7) / 8) * fsize.Height;
-				Renderer::DrawByMask(Rect::BaseOn(ActualPos + margin, fsize),
+				Renderer::DrawByMask(Rect::BaseOn(ActualPos + margin, fsize).ClipTo(ActualRect),
 									 FontColor,
 									 source[static_cast<int>(FontSize)] + offset,
 									 fsize);

@@ -71,7 +71,7 @@ namespace easy {
 			return *p;
 		}
 
-		void Arange(Size size) {
+		void Measure(Size size) {
 			Size margin = {
 				std::max(0, size.Width - Margin.Right - Margin.Left - SpecSize.Width),
 				std::max(0, size.Height - Margin.Top - Margin.Bottom - SpecSize.Height),
@@ -84,7 +84,7 @@ namespace easy {
 					Size arranged = { col_size[c], row_size[r] };
 					if (arranged.Height == 0) arranged.Height = margin.Height;
 					if (arranged.Width == 0) arranged.Width = margin.Width;
-					children[r][c]->Arange(arranged);
+					children[r][c]->Measure(arranged);
 				}
 			}
 			ActualSize = {
@@ -93,8 +93,8 @@ namespace easy {
 			};
 		}
 
-		void Layout(Pos base, Size size) {
-			_Element::Layout(base, size);
+		void Arange(Pos base, Size size) {
+			_Element::Arange(base, size);
 			Size margin = {
 				std::max(0, size.Width - Margin.Right - Margin.Left - SpecSize.Width),
 				std::max(0, size.Height - Margin.Top - Margin.Bottom - SpecSize.Height),
@@ -110,7 +110,7 @@ namespace easy {
 				for (int c = 0; c < (int)col_size.size(); ++c) {
 					arranged.Width = col_size[c];
 					if (arranged.Width == 0) arranged.Width = margin.Width;
-					if (children[r][c]) children[r][c]->Layout(rel, arranged);
+					if (children[r][c]) children[r][c]->Arange(rel, arranged);
 					rel.X += arranged.Width;
 				}
 				rel.Y += arranged.Height;

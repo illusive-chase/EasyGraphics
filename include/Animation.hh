@@ -65,7 +65,7 @@ namespace easy {
 
 			void step() {
 				double ratio = f(static_cast<double>(++curr) / total);
-				(ptr->*prop).assign_as_mixture(ratio, to, from);
+				assign_as_mixture(ptr->*prop, ratio, to, from);
 				Renderer::Invalidated() = true;
 				if (curr == total) {
 					*_Animation::handle = false;

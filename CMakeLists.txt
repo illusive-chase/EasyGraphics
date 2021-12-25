@@ -1,5 +1,5 @@
 project(EasyGraphics)
-set(SRC ./linux/LinuxRender.cc)
+set(SRC ./system/SystemIO.cc)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_C_COMPILER arm-none-linux-gnueabihf-gcc)
 set(CMAKE_CXX_COMPILER arm-none-linux-gnueabihf-g++)
