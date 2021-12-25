@@ -12,4 +12,5 @@ add_executable(${PROJECT_NAME} main.cc ${SRC})
 add_executable(EliminatingGame ./example/EliminatingGame.cc ${SRC})
 add_executable(Calculator ./example/Calculator.cc ${SRC})
 add_executable(CalculatorAnimation ./example/CalculatorAnimation.cc ${SRC})
+add_executable(CalculatorIm ./example/CalculatorIm.cc ${SRC})
 

@@ -8,13 +8,13 @@
 namespace easy {
 
 	enum class FontSizeType {
-		VERY_TINY,
-		TINY,
-		MEDIUM_TINY,
-		MEDIAN,
-		MEDIUM_LARGE,
-		LARGE,
-		VERY_LARGE
+		VeryTiny,
+		Tiny,
+		MediumTiny,
+		Medium,
+		MediumLarge,
+		Large,
+		VeryLarge
 	};
 
 	struct _Label;
@@ -42,7 +42,7 @@ namespace easy {
 
 		std::string Text;
 		Color FontColor = {};
-		FontSizeType FontSize = FontSizeType::MEDIAN;
+		FontSizeType FontSize = FontSizeType::Medium;
 		VerticalAlignType FontVerticalAlignment = VerticalAlignType::Center;
 		HorizontalAlignType FontHorizontalAlignment = HorizontalAlignType::Center;
 

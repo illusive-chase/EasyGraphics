@@ -29,7 +29,7 @@ int main() {
 	input->Margin = { 20 };
 	input->SpecSize = { 700, 70 };
 	input->BackgroundColor = Color::FromARGB(0xF0F0F0);
-	input->FontSize = FontSizeType::LARGE;
+	input->FontSize = FontSizeType::Large;
 	input->FontColor = Colors::Black;
 	input->VerticalAlignment = VerticalAlignType::Center;
 	input->HorizontalAlignment = HorizontalAlignType::Left;

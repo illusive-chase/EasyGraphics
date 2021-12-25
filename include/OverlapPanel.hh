@@ -29,7 +29,7 @@ namespace easy {
 			children.insert(p, elem);
 		}
 
-		int ElementSize() const {
+		int Capacity() const {
 			return static_cast<int>(children.size());
 		}
 

@@ -49,7 +49,7 @@ int main() {
             EaseInOutCubic
         );
         auto [begin, end] = history->GetRange();
-        int total = history->ElementSize();
+        int total = history->Capacity();
         for (int i = 0; begin != end; ++i, ++begin) {
             if (i > total - 6)
                 (*begin)->BeginAnimation(
@@ -86,7 +86,7 @@ int main() {
 	input->Margin = { 20 };
 	input->SpecSize = { 700, 70 };
 	input->BackgroundColor = Color::FromARGB(0xF0F0F0);
-	input->FontSize = FontSizeType::LARGE;
+	input->FontSize = FontSizeType::Large;
 	input->FontColor = Colors::Black;
 	input->VerticalAlignment = VerticalAlignType::Center;
 	input->HorizontalAlignment = HorizontalAlignType::Left;
@@ -96,7 +96,7 @@ int main() {
     Label hint = MakeLabel();
     hint->Margin = { 0, 0, 35 };
     hint->SpecSize.Height = 70;
-    hint->FontSize = FontSizeType::LARGE;
+    hint->FontSize = FontSizeType::Large;
     hint->VerticalAlignment = VerticalAlignType::Center;
 	hint->HorizontalAlignment = HorizontalAlignType::Right;
     hint->Text = " ";

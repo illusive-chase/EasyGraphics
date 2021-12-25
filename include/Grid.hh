@@ -36,6 +36,10 @@ namespace easy {
 			}
 		}
 
+		Size Capacity() const {
+			return { static_cast<int>(col_size.size()), static_cast<int>(row_size.size()) };
+		}
+
 		void Set(int row, int col, const Element& elem) {
 			children[row][col] = elem;
 		}
