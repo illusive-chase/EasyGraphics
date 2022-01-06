@@ -127,7 +127,7 @@ int* RenderImpl::MouseMove() {
 #include <Windows.h>
 #include <cstdio>
 
-#if 0
+#if 1
 #pragma comment( linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"" )
 #endif
 #define MAX_LOADSTRING 100
