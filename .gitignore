@@ -1,4 +1,5 @@
 /*
+!/documentation/
 !/example/
 !/font/
 !/include/
@@ -6,4 +7,5 @@
 !/windows/
 !/.gitignore
 !/CMakeLists.txt
-!/main.cc
+!/README.md
+!/README.pdf

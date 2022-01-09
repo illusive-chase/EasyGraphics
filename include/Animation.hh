@@ -90,10 +90,11 @@ namespace easy {
 		_event_forwarder<EventType, EventType::FinishAllAnimation, AnimationEventHandler>
 		FinishAllAnimation = { listener, always_enable };
 
-		template<typename T, typename O>
-		void BeginAnimation(std::shared_ptr<O> object, T O::*prop, T from, T to, unsigned miliseconds, EaseFunction ease = EaseLinear, bool multiple = false, double FPS = 40) {
+		template<typename T, typename O, typename D>
+		void BeginAnimation(std::shared_ptr<D> object, T O::*prop, T from, T to, unsigned miliseconds, EaseFunction ease = EaseLinear, bool multiple = false, double FPS = 40) {
 			unsigned total = static_cast<unsigned>(miliseconds * 0.001 * FPS);
-			_Animation* anim = new Animation<T, O>(this, object.get(), prop, from, to, total, ease);
+			std::shared_ptr<O> optr = object;
+			_Animation* anim = new Animation<T, O>(this, optr.get(), prop, from, to, total, ease);
 			for (auto itor = anims.begin(); itor != anims.end();) {
 				if (!multiple) {
 					Animation<T, O>* cast = dynamic_cast<Animation<T, O>*>(*itor);

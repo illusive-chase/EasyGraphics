@@ -241,7 +241,7 @@ BOOL WinRender::InitInstance(HINSTANCE hInstance, int nCmdShow)
     hInst = hInstance; // 将实例句柄存储在全局变量中
 
     gHWND = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-                          CW_USEDEFAULT, 0, 800, 540, nullptr, nullptr, hInstance, nullptr);
+                          CW_USEDEFAULT, 0, 800 + 15, 480 + 60, nullptr, nullptr, hInstance, nullptr);
 
     if (!gHWND)
     {

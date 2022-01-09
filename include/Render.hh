@@ -66,10 +66,10 @@ namespace easy {
 			Rect t = r.ClipTo(size);
 			if (t.Left >= t.Right || t.Top >= t.Bottom) return;
 			uint8_t* data = Data();
-			int line_size = size.Width * 4;
+			size_t line_size = size.Width * size_t(4);
 			for (int i = t.Left; i < t.Right; ++i) {
 				for (int j = t.Top; j < t.Bottom; ++j) {
-					FillPixel(data + (j * line_size + i * 4), c);
+					FillPixel(data + (j * line_size + i * size_t(4)), c);
 				}
 			}
 		}
@@ -100,12 +100,12 @@ namespace easy {
 			Rect t = r.ClipTo(size);
 			if (t.Left >= t.Right || t.Top >= t.Bottom) return;
 			uint8_t* data = Data();
-			int line_size = size.Width * 4;
+			size_t line_size = size.Width * size_t(4);
 			for (int i = t.Left; i < t.Right && i < t.Left + shape.Width; ++i) {
 				for (int j = t.Top; j < t.Bottom && j < t.Top + shape.Height; ++j) {
 					int index = (i - t.Left) + (j - t.Top) * ((shape.Width + 7) / 8 * 8);
 					if ((mask[index / 8] >> (7 - (index % 8))) & 0x1) {
-						FillPixel(data + (j * line_size + i * 4), c);
+						FillPixel(data + (j * line_size + i * size_t(4)), c);
 					}
 				}
 			}

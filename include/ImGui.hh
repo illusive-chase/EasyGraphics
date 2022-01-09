@@ -9,11 +9,14 @@
 namespace easy {
 
 	namespace imgui {
+
 		namespace _impl {
+
+
 			struct FrameHelper;
 			struct Frame {
 			public:
-				friend class FrameHelper;
+				friend struct FrameHelper;
 				Frame* parent;
 				Element elem;
 			protected:
@@ -35,8 +38,14 @@ namespace easy {
 					Frame* curr = CurrentFrame();
 					Frame* parent = curr->parent;
 					CurrentFrame() = parent;
-					if (parent) parent->Close(curr);
-					delete curr;
+					if (parent) {
+						parent->Close(curr);
+						delete curr;
+					} else {
+						Element root = curr->elem;
+						delete curr;
+						Renderer::MainLoop(root);
+					}
 				}
 				static void Clear() {
 					Frame* curr = CurrentFrame();
@@ -90,6 +99,17 @@ namespace easy {
 				}
 			};
 
+			template<typename H, EventType E, typename O>
+			struct EventAdder {
+				_event_forwarder<EventType, E, H> O::* e;
+				EventAdder(_event_forwarder<EventType, E, H> O::* e) : e(e) {}
+				EventAdder(const EventAdder&) = delete;
+				void operator +=(const H& handler) {
+					_Element* elem = Frame::Top()->elem.get();
+					dynamic_cast<O*>(elem)->*e += handler;
+				}
+			};
+
 			struct GridAssigner {
 				GridAssigner() {}
 				GridAssigner(const GridAssigner&) = delete;
@@ -107,6 +127,7 @@ namespace easy {
 				template<> FrameHelper(const OverlapPanel& elem) { Frame::Push(new OverlapPanelFrame(elem)); }
 				FrameHelper(const FrameHelper&) = delete;
 				~FrameHelper() { Frame::Pop(); }
+				operator bool() const { return true; }
 			};
 		}
 
@@ -120,6 +141,11 @@ namespace easy {
 		_impl::Assigner BackgroundColor = &_Element::BackgroundColor;
 		_impl::Assigner VerticalAlignment = &_Element::VerticalAlignment;
 		_impl::Assigner HorizontalAlignment = &_Element::HorizontalAlignment;
+		_impl::EventAdder Drag = &_Element::Drag;
+		_impl::EventAdder BeforeRender = &_Element::BeforeRender;
+		_impl::EventAdder Click = &_Element::Click;
+		_impl::EventAdder StartAnyAnimation = &IAnimation::StartAnyAnimation;
+		_impl::EventAdder FinishAllAnimation = &IAnimation::FinishAllAnimation;
 		_impl::GridAssigner GridPosition;
 		_impl::Assigner Text = &_Label::Text;
 		_impl::Assigner FontColor = &_Label::FontColor;
@@ -128,8 +154,9 @@ namespace easy {
 		_impl::Assigner FontHorizontalAlignment = &_Label::FontHorizontalAlignment;
 
 
-#define with(x) if (easy::imgui::_impl::FrameHelper _ = x; true)
-#define with_named(name, x) if (easy::imgui::_impl::FrameHelper _ = (name = x); true)
+#define begin_im Register<Renderer>(); Element This = nullptr
+#define with(x) if (Element Parent = This, This = x; easy::imgui::_impl::FrameHelper _ = std::dynamic_pointer_cast<typename decltype(x)::element_type, _Element>(This))
+#define with_named(name, x) if (Element Parent = This, This = (name = x); easy::imgui::_impl::FrameHelper _ = std::dynamic_pointer_cast<typename decltype(x)::element_type, _Element>(This))
 		
 
 

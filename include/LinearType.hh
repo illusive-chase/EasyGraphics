@@ -138,7 +138,7 @@ namespace easy {
 	template<typename T, std::enable_if_t<linear_length<T>::value == 1, int> I = 0>
 	static constexpr T& assign_as_mixture(T& dest, double ratio1, const T& s1, const T& s2) {
 		double ratio2 = 1 - ratio1;
-		dest = ratio1 * s1 + ratio2 * s2;
+		dest = static_cast<T>(ratio1 * s1 + ratio2 * s2);
 		return dest;
 	}
 
@@ -148,8 +148,8 @@ namespace easy {
 		auto [x2, y2] = s2;
 		auto& [x, y] = dest;
 		double ratio2 = 1 - ratio1;
-		x = ratio1 * x1 + ratio2 * x2;
-		y = ratio1 * y1 + ratio2 * y2;
+		x = static_cast<decltype(x)>(ratio1 * x1 + ratio2 * x2);
+		y = static_cast<decltype(y)>(ratio1 * y1 + ratio2 * y2);
 		return dest;
 	}
 
@@ -159,10 +159,10 @@ namespace easy {
 		auto [x2, y2, z2, w2] = s2;
 		auto& [x, y, z, w] = dest;
 		double ratio2 = 1 - ratio1;
-		x = ratio1 * x1 + ratio2 * x2;
-		y = ratio1 * y1 + ratio2 * y2;
-		z = ratio1 * z1 + ratio2 * z2;
-		w = ratio1 * w1 + ratio2 * w2;
+		x = static_cast<decltype(x)>(ratio1 * x1 + ratio2 * x2);
+		y = static_cast<decltype(y)>(ratio1 * y1 + ratio2 * y2);
+		z = static_cast<decltype(z)>(ratio1 * z1 + ratio2 * z2);
+		w = static_cast<decltype(w)>(ratio1 * w1 + ratio2 * w2);
 		return dest;
 	}
 

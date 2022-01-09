@@ -55,7 +55,7 @@ namespace easy {
 			if (SpecSize.Height == 0) ActualSize.Height = std::max(0, size.Height - Margin.Top - Margin.Bottom);
 		}
 
-		virtual void Arange(Pos base, Size size) {
+		virtual void Arrange(Pos base, Size size) {
 			if (HorizontalAlignment == HorizontalAlignType::Left)
 				ActualPos.X = base.X + Margin.Left;
 			else if (HorizontalAlignment == HorizontalAlignType::Right)
@@ -91,7 +91,8 @@ namespace easy {
 			if (Renderer::Invalidated()) {
 				Pos origin = { 0, 0 };
 				root->Measure(size);
-				root->Arange(origin, size);
+				root->Arrange(origin, size);
+				root->BeforeRender(root, EventArgs{ EventType::BeforeRender } );
 				root->Render();
 				Renderer::Render();
 				Renderer::Invalidated() = false;

@@ -28,7 +28,7 @@ namespace easy {
 	};
 
 	enum class EventType {
-		EnterFrame,
+		BeforeRender,
 		Drag,
 		Click,
 		StartAnyAnimation,
@@ -63,7 +63,7 @@ namespace easy {
 
 
 		bool Enable = true;
-		_event_forwarder<EventType, EventType::EnterFrame, EventHandler> EnterFrame = { listener, Enable };
+		_event_forwarder<EventType, EventType::BeforeRender, EventHandler> BeforeRender = { listener, Enable };
 		_event_forwarder<EventType, EventType::Drag, MouseEventHandler> Drag = { mouse_listener, Enable };
 		_event_forwarder<EventType, EventType::Click, MouseEventHandler> Click = { mouse_listener, Enable };
 		//_event_forwarder<EventType, EventType::VisibleChanged, EventHandler> VisibleChanged = { listener, Enable };

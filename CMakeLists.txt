@@ -8,7 +8,7 @@ set(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
 
 include_directories(.)
 
-add_executable(${PROJECT_NAME} main.cc ${SRC})
+add_executable(Quickstart ./example/Quickstart.cc ${SRC})
 add_executable(EliminatingGame ./example/EliminatingGame.cc ${SRC})
 add_executable(Calculator ./example/Calculator.cc ${SRC})
 add_executable(CalculatorAnimation ./example/CalculatorAnimation.cc ${SRC})

@@ -97,8 +97,8 @@ namespace easy {
 			};
 		}
 
-		void Arange(Pos base, Size size) {
-			_Element::Arange(base, size);
+		void Arrange(Pos base, Size size) {
+			_Element::Arrange(base, size);
 			Size margin = {
 				std::max(0, size.Width - Margin.Right - Margin.Left - SpecSize.Width),
 				std::max(0, size.Height - Margin.Top - Margin.Bottom - SpecSize.Height),
@@ -114,7 +114,7 @@ namespace easy {
 				for (int c = 0; c < (int)col_size.size(); ++c) {
 					arranged.Width = col_size[c];
 					if (arranged.Width == 0) arranged.Width = margin.Width;
-					if (children[r][c]) children[r][c]->Arange(rel, arranged);
+					if (children[r][c]) children[r][c]->Arrange(rel, arranged);
 					rel.X += arranged.Width;
 				}
 				rel.Y += arranged.Height;
@@ -126,7 +126,10 @@ namespace easy {
 			_Element::Render();
 			for (auto& rows : children)
 				for (auto& item : rows)
-					if (item) item->Render();
+					if (item) {
+						item->BeforeRender(item, EventArgs{ EventType::BeforeRender });
+						item->Render();
+					}
 		}
 
 	};

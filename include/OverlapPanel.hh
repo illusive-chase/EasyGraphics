@@ -81,17 +81,20 @@ namespace easy {
 			}
 		}
 
-		void Arange(Pos base, Size size) {
-			_Element::Arange(base, size);
+		void Arrange(Pos base, Size size) {
+			_Element::Arrange(base, size);
 			for (auto& child : children)
-				if (child) child->Arange(ActualPos, ActualSize);
+				if (child) child->Arrange(ActualPos, ActualSize);
 		}
 
 		void Render() {
 			if (!Visible) return;
 			_Element::Render();
 			for (auto& child : children)
-				if (child) child->Render();
+				if (child) {
+					child->BeforeRender(child, EventArgs{ EventType::BeforeRender });
+					child->Render();
+				}
 		}
 
 	};
