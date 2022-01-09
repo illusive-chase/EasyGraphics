@@ -1,5 +1,7 @@
 # EasyGraphics
 
+[https://github.com/illusive-chase/EasyGraphics](https://github.com/illusive-chase/EasyGraphics)
+
 ## 概述
 
 EasyGraphics是一个轻量的构建图形界面应用的跨平台C++图形化接口，以易使用、源码易读、易扩展为设计目标，目前支持嵌入式Linux系统和Windows系统。
@@ -152,14 +154,17 @@ int main() {
 
 + 创建一个持续500ms、渐出的平移动画，作用于控件grids\[k\]\[j\]：
 
-  ```
+  ```c++
   g->BeginAnimation(
-  		grids[k][j], &_Element::Margin,
-  		grids[k][j]->Margin,
-  		grids[k][j]->Margin + 
-  	    	   Rect{ 0, emptySlot * (gsize + margin), 0, 0 },
-  		500, EaseOutBounce,
-  		true);
+      grids[k][j],
+      &_Element::Margin,
+      grids[k][j]->Margin,
+      grids[k][j]->Margin + 
+      	Rect{ 0, emptySlot * (gsize + margin), 0, 0 },
+      500,
+      EaseOutBounce,
+      true
+  );
   ```
 
 具体文档可参考[快速入门](./documentation/Quickstart.md)。
